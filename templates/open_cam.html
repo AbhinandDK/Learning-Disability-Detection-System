@@ -1,0 +1,48 @@
+{% extends "index.html" %}
+{% block body %}
+<table width="200" border="1"class="table table-hover" >
+  <tr style="background: #e1d8a2">
+    <td>
+            <a id="lnk" href="#" target="_blank" class="btn btn-info"> Join</a>&emsp; <a id="lnk2" class="btn btn-danger"> Close cam</a>
+    </td>
+  </tr>
+</table>
+    <script src="/static/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $("#lnk2").hide();
+      $("#lnk").click(function(){
+        $("#lnk2").show();
+          $.ajax({
+                type: "POST",
+                url: "/stud_cam_start",
+                success: function(data) {
+                  console.log(data);
+                  if(data.status == "ok")
+                  {
+                      alert("Cam started");
+
+                  }
+                }
+              });
+
+      });
+      $("#lnk2").click(function(){
+
+          $.ajax({
+                type: "POST",
+                url: "/stud_cam_stop",
+                success: function(data) {
+                  console.log(data);
+                  if(data.status == "ok")
+                  {
+                      alert("Cam closed");
+                  }
+                }
+              });
+
+      });
+    });
+
+    </script>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "admin/index_new.html" %}
+{% block body %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<table width="526" border="1" class="table table-dark table-striped-columns">
+  <tr style="color: #fff;background: #000">
+    <th width="20" height="26" scope="col">ID</th>
+    <th width="59" scope="col">Name</th>
+    <th width="45" scope="col">Age</th>
+    <th width="70" scope="col">Photo</th>
+    <th width="94" scope="col">Mob</th>
+    <th width="198" scope="col">Email</th>
+    <th width="198" scope="col"></th>
+  </tr>
+   {% for i in pqr %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ i.name }}</td>
+      <td>{{ i.age }} </td>
+        <td><img src="{{ i.image }}" height="100" width="100"> </td>
+        <td>{{ i.phone }}</td>
+        <td>{{ i.email }}</td>
+        <td><a href="/test_history/{{ i.id }}#a" class="btn btn-info">View test result</a> </td>
+    </tr>
+      {% endfor %}
+</table>
+</body>
+</html>
+{% endblock %}

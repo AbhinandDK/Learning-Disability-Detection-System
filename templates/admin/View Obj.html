@@ -1,0 +1,32 @@
+{% extends "admin/index_new.html" %}
+{% block body %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<form id="form1" name="form1" method="post" action="">
+  <table width="485" border="1"  class="table table-dark table-striped-columns">
+     <tr style="color: #fff;background: #000">
+      <th width="58" scope="col">sl no.</th>
+      <th width="66" scope="col">Name</th>
+      <th width="178" scope="col">Photo</th>
+      <th width="155" scope="col">&nbsp;</th>
+    </tr>
+      {% for i in data %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ i.name }}</td>
+      <td><img src="{{ i.image }}" height="100" width="100"> </td>
+      <td>
+      <p><a href="/delete_obj/{{ i.id }}" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a></p></td>
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}
