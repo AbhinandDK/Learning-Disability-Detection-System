@@ -1,45 +1,11 @@
-#!/usr/bin/python3
-# -*- coding: utf-8 -*-
 
-#MIT License
-#
-#Copyright (c) 2018 Iván de Paz Centeno
-#
-#Permission is hereby granted, free of charge, to any person obtaining a copy
-#of this software and associated documentation files (the "Software"), to deal
-#in the Software without restriction, including without limitation the rights
-#to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-#copies of the Software, and to permit persons to whom the Software is
-#furnished to do so, subject to the following conditions:
-#
-#The above copyright notice and this permission notice shall be included in all
-#copies or substantial portions of the Software.
-#
-#THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-#IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-#FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-#AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-#LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-#OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-#SOFTWARE.
 
-# IMPORTANT:
-#
-# This code is derivated from the MTCNN implementation of David Sandberg for Facenet
-# (https://github.com/davidsandberg/facenet/)
-# It has been rebuilt from scratch, taking the David Sandberg's implementation as a reference.
-# The code improves the readibility, fixes several mistakes in the definition of the network (layer names)
-# and provides the keypoints of faces as outputs along with the bounding boxes.
-#
 
 import cv2
 import numpy as np
 import pkg_resources
 import tensorflow as tf
 
-# from Ldd_app.mtcnn.exceptions import  InvalidImage
-# from Ldd_app.mtcnn import layer_factory as LayerFactory
-# from Ldd_app.mtcnn import network as Network
 
 from Ldd_app.mtcnn.exceptions import InvalidImage
 from Ldd_app.mtcnn.layer_factory import LayerFactory
@@ -246,7 +212,6 @@ class MTCNN(object):
 
         im_data = cv2.resize(image, (width_scaled, height_scaled), interpolation=cv2.INTER_AREA)
 
-        # Normalize the image's pixels
         im_data_normalized = (im_data - 127.5) * 0.0078125
 
         return im_data_normalized
@@ -254,7 +219,6 @@ class MTCNN(object):
     @staticmethod
     def __generate_bounding_box(imap, reg, scale, t):
 
-        # use heatmap to generate bounding boxes
         stride = 2
         cellsize = 12
 
@@ -339,7 +303,6 @@ class MTCNN(object):
 
     @staticmethod
     def __pad(total_boxes, w, h):
-        # compute the padding coordinates (pad the bounding boxes to square)
         tmpw = (total_boxes[:, 2] - total_boxes[:, 0] + 1).astype(np.int32)
         tmph = (total_boxes[:, 3] - total_boxes[:, 1] + 1).astype(np.int32)
         numbox = total_boxes.shape[0]
@@ -374,7 +337,6 @@ class MTCNN(object):
 
     @staticmethod
     def __rerec(bbox):
-        # convert bbox to square
         h = bbox[:, 3] - bbox[:, 1]
         w = bbox[:, 2] - bbox[:, 0]
         l = np.maximum(w, h)
@@ -385,7 +347,6 @@ class MTCNN(object):
 
     @staticmethod
     def __bbreg(boundingbox, reg):
-        # calibrate bounding boxes
         if reg.shape[1] == 1:
             reg = np.reshape(reg, (reg.shape[2], reg.shape[3]))
 
@@ -418,7 +379,6 @@ class MTCNN(object):
         stages = [self.__stage1, self.__stage2, self.__stage3]
         result = [scales, stage_status]
 
-        # We pipe here each of the stages
         for stage in stages:
             result = stage(img, result[0], result[1])
 
@@ -442,8 +402,6 @@ class MTCNN(object):
                 }
             )
 
-    ### the following 2 lines changed by Asif Khan ###    
-    #return bounding_boxes
         return total_boxes, points
 
     def __stage1(self, image, scales: list, stage_status: StageStatus):
@@ -471,7 +429,6 @@ class MTCNN(object):
             boxes, _ = self.__generate_bounding_box(out1[0, :, :, 1].copy(),
                                                     out0[0, :, :, :].copy(), scale, self.__steps_threshold[0])
 
-            # inter-scale nms
             pick = self.__nms(boxes.copy(), 0.5, 'Union')
             if boxes.size > 0 and pick.size > 0:
                 boxes = boxes[pick, :]
@@ -513,7 +470,6 @@ class MTCNN(object):
         if num_boxes == 0:
             return total_boxes, stage_status
 
-        # second stage
         tempimg = np.zeros(shape=(24, 24, 3, num_boxes))
 
         for k in range(0, num_boxes):

@@ -1,27 +1,4 @@
-#!/usr/bin/python3
-# -*- coding: utf-8 -*-
 
-#MIT License
-#
-#Copyright (c) 2018 Iván de Paz Centeno
-#
-#Permission is hereby granted, free of charge, to any person obtaining a copy
-#of this software and associated documentation files (the "Software"), to deal
-#in the Software without restriction, including without limitation the rights
-#to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-#copies of the Software, and to permit persons to whom the Software is
-#furnished to do so, subject to the following conditions:
-#
-#The above copyright notice and this permission notice shall be included in all
-#copies or substantial portions of the Software.
-#
-#THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-#IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-#FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-#AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-#LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-#OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-#SOFTWARE.
 
 import tensorflow as tf
 from distutils.version import LooseVersion
@@ -57,12 +34,10 @@ class LayerFactory(object):
         input_shape = input_layer.get_shape()
 
         if input_shape.ndims == 4:
-            # Spatial input, must be vectorized.
             dim = 1
             for x in input_shape[1:].as_list():
                 dim *= int(x)
 
-            #dim = operator.mul(*(input_shape[1:].as_list()))
             vectorized_input = tf.reshape(input_layer, [-1, dim])
         else:
             vectorized_input, dim = (input_layer, input_shape[-1])
@@ -106,18 +81,14 @@ class LayerFactory(object):
         the network.
         """
 
-        # Verify that the padding is acceptable
         self.__validate_padding(padding)
 
         input_layer = self.__network.get_layer(input_layer_name)
 
-        # Get the number of channels in the input
         channels_input = int(input_layer.get_shape()[-1])
 
-        # Verify that the grouping parameter is valid
         self.__validate_grouping(channels_input, channels_output, group)
 
-        # Convolution for a given input and kernel
         convolve = lambda input_val, kernel: tf.nn.conv2d(input=input_val,
                 filters=kernel, 
                 strides=[1, stride_size[1], stride_size[0], 1],
@@ -128,12 +99,10 @@ class LayerFactory(object):
 
             output = convolve(input_layer, kernel)
 
-            # Add the biases, if required
             if biased:
                 biases = self.__make_var('biases', [channels_output])
                 output = tf.nn.bias_add(output, biases)
 
-            # Apply ReLU non-linearity, if required
             if relu:
                 output = tf.nn.relu(output, name=scope.name)
 

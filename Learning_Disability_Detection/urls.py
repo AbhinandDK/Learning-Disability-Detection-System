@@ -19,7 +19,6 @@ from django.urls import path, include
 from Ldd_app import views
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
     path('', views.log),
     path('log_post', views.log_post),
     path('changepassword', views.changepassword),
@@ -37,7 +36,6 @@ urlpatterns = [
     path('test_history/<id>', views.test_history),
     path('admin_home', views.admin_home),
     path('logout',views.logout),
-    #################################################################3
     path('user_login',views.user_login),
     path('user_register',views.user_register),
     path('change_password',views.change_password),

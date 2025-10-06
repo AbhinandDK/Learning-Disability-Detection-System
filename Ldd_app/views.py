@@ -15,7 +15,6 @@ def admin_home(request):
     if request.session['lid']=="":
         return HttpResponse("<script>alert('Your session ended.');window.location='/'</script>")
     request.session['head']="ADMIN HOME"
-    # return render(request,'admin/index2.html')
     return render(request,'admin/index_new.html')
 
 def log(request):
@@ -166,7 +165,6 @@ def logout(request):
 
 
 
-#######################################################################################################3
 def user_login(request):
     username = request.POST['username']
     password = request.POST['password']
@@ -319,15 +317,15 @@ def and_insert_speech_marks(request):
 
 
 def scramble_word(word):
-    # Convert the word to a list of characters
+
     word_list = list(word)
-    # Shuffle the list
+
     random.shuffle(word_list)
-    # Convert the list back to a string
+    
     scrambled_word = ''.join(word_list)
     return scrambled_word
 
-#   scrambled
+
 def and_view_objects_scr(request):
     res=objectss.objects.all()
     ar=[]
@@ -408,14 +406,12 @@ def user_view_result(request):
     if avg_dysl > 20 and avg_adhd < 30 and avg_dysc >20:
         return JsonResponse({"status": "healthy"})
 
-    # feats=[avg_dysl, avg_adhd, avg_dysc]
     feats=[avg_dysc, avg_dysl, avg_adhd]
     print(feats)
     rf=joblib.load(r'C:\Users\abhin\PycharmProjects\Learning_Disability_Detection\Ldd_app\static\rf_model.joblib')
     y_pred=rf.predict(x_test)
     acc=accuracy_score(y_test, y_pred)
     acc=round(acc*100, 2)
-    # print("Accuracy : ", acc)
     pred=rf.predict([feats])
     print("Prediction : ", pred[0])
     res=""
@@ -430,7 +426,7 @@ def user_view_result(request):
         "Dyscalculia" : "Exercise self-talking through solving problems.\nConnect math to real life with concrete examples.\nReview what you have learned before learning new skills.",
         "ADHD" : "Sit in the front of class to limit distractions\nTurn off your phone when doing homework\nLearn to meditate.",
         "Dyslexia" : "Emphasize instant letter recognition whenever possible.\nBuild background knowledge and set a purpose for reading to strengthen your comprehension."
-                     "\nWhen possible, reread passages after the teacher reads the passage for you.",
+                    "\nWhen possible, reread passages after the teacher reads the passage for you.",
     }
     return JsonResponse({"status":"ok", "pred":res, "sugg":sugg[res]})
 
