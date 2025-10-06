@@ -153,12 +153,12 @@
         width: 100%;
         height: 100%;
         content: "";
-        /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffffff+0,000000+100 */
-          background: #ffffff; /* Old browsers */
-          background: -moz-linear-gradient(top,  #ffffff 0%, #000000 77%); /* FF3.6-15 */
-          background: -webkit-linear-gradient(top,  #ffffff 0%,#000000 77%); /* Chrome10-25,Safari5.1-6 */
-          background: linear-gradient(to bottom,  #ffffff 0%,#000000 77%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+        
+          background: #ffffff; 
+          background: -moz-linear-gradient(top,  #ffffff 0%, #000000 77%); 
+          background: -webkit-linear-gradient(top,  #ffffff 0%,#000000 77%); 
+          background: linear-gradient(to bottom,  #ffffff 0%,#000000 77%); 
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000',GradientType=0 ); 
           z-index: 1;
           opacity: .5;
       }

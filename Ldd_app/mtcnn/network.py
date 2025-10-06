@@ -2,8 +2,6 @@
 
 import tensorflow as tf
 
-__author__ = "Iván de Paz Centeno"
-
 
 class Network(object):
 

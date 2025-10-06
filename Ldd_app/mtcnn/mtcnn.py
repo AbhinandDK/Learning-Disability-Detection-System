@@ -11,7 +11,6 @@ from Ldd_app.mtcnn.exceptions import InvalidImage
 from Ldd_app.mtcnn.layer_factory import LayerFactory
 from Ldd_app.mtcnn.network import Network
 
-__author__ = "Iván de Paz Centeno"
 
 
 class PNet(Network):

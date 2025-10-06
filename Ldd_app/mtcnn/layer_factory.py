@@ -3,7 +3,6 @@
 import tensorflow as tf
 from distutils.version import LooseVersion
 
-__author__ = "Iván de Paz Centeno"
 
 
 class LayerFactory(object):

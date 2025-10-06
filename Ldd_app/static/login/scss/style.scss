@@ -119,16 +119,16 @@ h1, h2, h3, h4, h5,
 	padding-left: 20px;
 	padding-right: 20px;
 	@include transition(.3s);
-	&::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	&::-webkit-input-placeholder { 
 	  color: rgba(255,255,255,.8) !important;
 	}
-	&::-moz-placeholder { /* Firefox 19+ */
+	&::-moz-placeholder { 
 	  color: rgba(255,255,255,.8) !important;
 	}
-	&:-ms-input-placeholder { /* IE 10+ */
+	&:-ms-input-placeholder { 
 	  color: rgba(255,255,255,.8) !important;
 	}
-	&:-moz-placeholder { /* Firefox 18- */
+	&:-moz-placeholder { 
 	  color: rgba(255,255,255,.8) !important;
 	}
 	&:hover, &:focus{
@@ -163,7 +163,7 @@ textarea.form-control {
   user-select: none;
 }
 
-/* Hide the browser's default checkbox */
+
 .checkbox-wrap input {
   position: absolute;
   opacity: 0;
@@ -172,7 +172,7 @@ textarea.form-control {
   width: 0;
 }
 
-/* Create a custom checkbox */
+
 .checkmark {
   position: absolute;
   top: 0;
@@ -180,7 +180,7 @@ textarea.form-control {
 }
 
 
-/* Create the checkmark/indicator (hidden when not checked) */
+
 .checkmark:after {
   content: "\f0c8";
   font-family: "FontAwesome";
@@ -191,7 +191,7 @@ textarea.form-control {
   @include transition(.3s);
 }
 
-/* Show the checkmark when checked */
+
 .checkbox-wrap{
 	input:checked ~ .checkmark:after {
 	  display: block;
@@ -201,7 +201,7 @@ textarea.form-control {
 	}
 }
 
-/* Style the checkmark/indicator */
+
 .checkbox-wrap .checkmark:after {
 }
 

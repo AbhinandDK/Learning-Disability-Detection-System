@@ -1,4 +1,4 @@
-// Avoid `console` errors in browsers that lack a console.
+
 (function() {
     var method;
     var noop = function () {};
@@ -14,11 +14,11 @@
     while (length--) {
         method = methods[length];
 
-        // Only stub undefined methods.
+        
         if (!console[method]) {
             console[method] = noop;
         }
     }
 }());
 
-// Place any jQuery/helper plugins in here.
+

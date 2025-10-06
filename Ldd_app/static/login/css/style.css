@@ -1,9 +1,4 @@
-/*!
- * Bootstrap v4.3.1 (https://getbootstrap.com/)
- * Copyright 2011-2019 The Bootstrap Authors
- * Copyright 2011-2019 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- */
+
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -8241,16 +8236,16 @@ h1, h2, h3, h4, h5,
       -o-transition: none;
       transition: none; } }
   .form-control::-webkit-input-placeholder {
-    /* Chrome/Opera/Safari */
+    
     color: rgba(255, 255, 255, 0.8) !important; }
   .form-control::-moz-placeholder {
-    /* Firefox 19+ */
+    
     color: rgba(255, 255, 255, 0.8) !important; }
   .form-control:-ms-input-placeholder {
-    /* IE 10+ */
+    
     color: rgba(255, 255, 255, 0.8) !important; }
   .form-control:-moz-placeholder {
-    /* Firefox 18- */
+    
     color: rgba(255, 255, 255, 0.8) !important; }
   .form-control:hover, .form-control:focus {
     background: transparent;
@@ -8277,7 +8272,7 @@ textarea.form-control {
   -ms-user-select: none;
   user-select: none; }
 
-/* Hide the browser's default checkbox */
+
 .checkbox-wrap input {
   position: absolute;
   opacity: 0;
@@ -8285,13 +8280,13 @@ textarea.form-control {
   height: 0;
   width: 0; }
 
-/* Create a custom checkbox */
+
 .checkmark {
   position: absolute;
   top: 0;
   left: 0; }
 
-/* Create the checkmark/indicator (hidden when not checked) */
+
 .checkmark:after {
   content: "\f0c8";
   font-family: "FontAwesome";
@@ -8308,14 +8303,14 @@ textarea.form-control {
       -o-transition: none;
       transition: none; } }
 
-/* Show the checkmark when checked */
+
 .checkbox-wrap input:checked ~ .checkmark:after {
   display: block;
   content: "\f14a";
   font-family: "FontAwesome";
   color: rgba(0, 0, 0, 0.2); }
 
-/* Style the checkmark/indicator */
+
 .checkbox-primary {
   color: #fbceb5; }
   .checkbox-primary input:checked ~ .checkmark:after {
